@@ -3,7 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
 import 'constants.dart';
-import 'round_icon_button.dart';
+import 'number_selector.dart';
+import 'results_page.dart';
 
 enum Gender {
   male,
@@ -114,97 +115,67 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     color: kActiveCardColor,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'WEIGHT',
-                          style: kLabelTextStyle,
-                        ),
-                        Text(
-                          weight.toString(),
-                          style: kNumberTextStyle,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            RoundIconButton(
-                              icon: FontAwesomeIcons.minus,
-                              onPressed: () {
-                                setState(() {
-                                  weight--;
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            RoundIconButton(
-                              icon: FontAwesomeIcons.plus,
-                              onPressed: () {
-                                setState(() {
-                                  weight++;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                    cardChild: NumberSelector(
+                      label: 'WEIGHT',
+                      number: weight,
+                      increment: () {
+                        setState(() {
+                          weight--;
+                        });
+                      },
+                      decrement: () {
+                        setState(() {
+                          weight++;
+                        });
+                      },
                     ),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
                     color: kActiveCardColor,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'AGE',
-                          style: kLabelTextStyle,
-                        ),
-                        Text(
-                          age.toString(),
-                          style: kNumberTextStyle,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            RoundIconButton(
-                              icon: FontAwesomeIcons.minus,
-                              onPressed: () {
-                                setState(() {
-                                  age--;
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            RoundIconButton(
-                              icon: FontAwesomeIcons.plus,
-                              onPressed: () {
-                                setState(() {
-                                  age++;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                    cardChild: NumberSelector(
+                      label: 'AGE',
+                      number: age,
+                      increment: () {
+                        setState(() {
+                          age--;
+                        });
+                      },
+                      decrement: () {
+                        setState(() {
+                          age++;
+                        });
+                      },
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            width: double.infinity,
-            height: kBottomContHeight,
-            margin: EdgeInsets.only(
-              top: 10.0,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(),
+                ),
+              );
+            },
+            child: Container(
+              child: Center(
+                child: Text(
+                  'CALCULATE',
+                  style: kNavTextStyle,
+                ),
+              ),
+              width: double.infinity,
+              height: kBottomContHeight,
+              margin: EdgeInsets.only(
+                top: 10.0,
+              ),
+              color: kBottomContColor,
             ),
-            color: kBottomContColor,
           ),
         ],
       ),
